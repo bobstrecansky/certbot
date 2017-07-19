@@ -626,12 +626,10 @@ class ClientNetworkTest(unittest.TestCase):
             self.net._send_request('GET', "http://localhost:19123/nonexistent.txt")
 
         except ValueError as e:
-            self.assertEqual("Requesting localhost/nonexistent: "
-                             "[Errno 111] Connection refused", str(e))
+            self.assertIn("Connection refused", str(e))
 
         except requests.exceptions.ConnectionError as x:
-            self.assertEqual("('Connection aborted.', "
-                             "error(111, 'Connection refused'))", str(x))
+            self.assertIn("Connection refused", str(x))
 
 class ClientNetworkWithMockedResponseTest(unittest.TestCase):
     """Tests for acme.client.ClientNetwork which mock out response."""

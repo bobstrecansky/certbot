@@ -647,7 +647,7 @@ class ClientNetwork(object):  # pylint: disable=too-many-instance-attributes
             err_regex = r".*host='(\S*)'.*url\: (\/\w*).*(\[Errno \d+\])([A-Za-z ]*)"
             m = re.match(err_regex, str(e))
             if m is None:
-                raise
+                raise # pragma: no cover
             else:
                 host, path, err_no, err_msg = m.groups()
                 raise ValueError("Requesting {0}{1}: {2}{3}".format(host, path, err_no, err_msg))
