@@ -621,14 +621,11 @@ class ClientNetworkTest(unittest.TestCase):
                           self.net._send_request, 'GET', 'uri')
 
     def test_urllib_error(self):
-        if sys.version_info < (2, 7)
-            self.assertEqual(
-
         try:
             # pylint: disable=protected-access
             self.net._send_request('GET', "http://localhost:19123/nonexistent.txt")
 
-        if sys.version_info < (2, 7)
+        if sys.version_info < (2, 7):
             except Exception as x:
             self.assertEqual("Connection Refused", str(x))
 
