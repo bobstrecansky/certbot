@@ -621,15 +621,22 @@ class ClientNetworkTest(unittest.TestCase):
                           self.net._send_request, 'GET', 'uri')
 
     def test_urllib_error(self):
+        if sys.version_info < (2, 7)
+            self.assertEqual(
+
         try:
             # pylint: disable=protected-access
             self.net._send_request('GET', "http://localhost:19123/nonexistent.txt")
 
-        except ValueError as e:
-            self.assertIn("Connection refused", str(e))
+        if sys.version_info < (2, 7)
+            except Exception as x:
+            self.assertEqual("Connection Refused", str(x))
 
-        except requests.exceptions.ConnectionError as x:
-            self.assertIn("Connection refused", str(x))
+        except ValueError as y:
+            self.assertIn("Connection refused", str(y))
+
+        except requests.exceptions.ConnectionError as z:
+            self.assertIn("Connection refused", str(z))
 
 class ClientNetworkWithMockedResponseTest(unittest.TestCase):
     """Tests for acme.client.ClientNetwork which mock out response."""
