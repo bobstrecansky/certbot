@@ -627,22 +627,19 @@ class ClientNetworkTest(unittest.TestCase):
             self.net._send_request('GET', "http://localhost:19123/nonexistent.txt")
 
         except ValueError as y:
-            if sys.platform == "linux2":
+            if "linux" in sys.platform:
                 self.assertEqual("Requesting localhost/nonexistent: "
                                  "[Errno 111] Connection refused", str(y))
-            else:
-                # OSX
+            else: #OSX
                 self.assertEqual("Requesting localhost/nonexistent: "
                                  "[Errno 61] Connection refused", str(y))
 
-
         except requests.exceptions.ConnectionError as z:
-            if sys.platform == "linux2":
-                self.assertEqual("('Connection aborted.',"
+            if "linux" in sys.platform:
+                self.assertEqual("('Connection aborted.', "
                                  "error(111, 'Connection refused'))", str(z))
-            else:
-                #OSX
-                self.assertEqual("('Connection aborted.',"
+            else: #OSX
+                self.assertEqual("('Connection aborted.', "
                                  "error(61, 'Connection refused'))", str(z))
 
 class ClientNetworkWithMockedResponseTest(unittest.TestCase):
